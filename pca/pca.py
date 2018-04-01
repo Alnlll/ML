@@ -61,5 +61,3 @@ if '__main__' == __name__:
     test.data_ploter.plot(data[:,0], data[:,1])
     print('Approximation of the first example:\n', data[0, 0], data[0, 1]);
     print('\n(this value should be about  -1.047419 -1.047419)\n\n');
-
-
