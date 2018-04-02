@@ -1,12 +1,14 @@
 import scipy.io as sio
+import numpy as np
 
 class DataLoader(object):
-    def __init__(self, data_path = ''):
-        self.data_path = data_path
-
-    def load(self):
+    def __init__(self):
+        pass
+    def load(self, data_path = '', delimiter = ','):
         
-        data_type = self.data_path.split(".")[-1];
+        data_type = data_path.split(".")[-1];
     
         if 'mat' == data_type:
-            return sio.loadmat(self.data_path)
+            return sio.loadmat(data_path)
+        if data_type in ['csv','txt']:
+            return np.loadtxt(data_path, delimiter=delimiter)

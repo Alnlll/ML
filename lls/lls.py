@@ -35,6 +35,7 @@ if '__main__' == __name__:
     while (np.linalg.norm(test.lls_grad(x, A, b)) > epsilon) and (count < 5000):
         if 0 == (count % 10):
             values.append(test.lls_func(x, A, b))
+            print("Cost(%d): %f" % (count, values[-1]))
         x = optimizer.descent(test.lls_grad(x, A, b), x)
         count += 1
 

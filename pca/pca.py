@@ -12,7 +12,7 @@ class Pca(object):
     
     def __init__(self, data_path):
         self.data_path = data_path
-        self.data_loader = DataLoader(self.data_path)
+        self.data_loader = DataLoader()
         self.data_ploter = Ploter()
         self.data_normalizer = Normalizer()
 
@@ -34,7 +34,7 @@ class Pca(object):
 
 if '__main__' == __name__:
     test = Pca('./data/ex7data1.mat')
-    data = test.data_loader.load()['X']
+    data = test.data_loader.load(test.data_path)['X']
     test.data_ploter.plot(data[:,0], data[:,1])
     
     mu, sigma, data = test.data_normalizer.normalize(data)
