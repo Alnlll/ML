@@ -4,8 +4,8 @@ class Ploter(object):
     def __init__(self, linewidth=2):
         self.linewidth = linewidth
 
-    def plot(self, data1, data2, set_str = 'r+', linewidth=2, label=''):
-        plt.plot(data1, data2, set_str, linewidth=linewidth, label=label)
+    def plot(self, *args, **kwargs):
+        plt.plot(*args, **kwargs)
 
     def axis_label(self, axis=0, label=''):
         if 0 == axis:
@@ -20,3 +20,13 @@ class Ploter(object):
 
     def show(self):
         plt.show()
+
+import numpy as np
+
+if __name__ == "__main__":
+
+    test = Ploter()
+    x = np.array(([1,2]))
+    y = x
+    test.plot(x,y,linewidth=2)
+    test.show()
