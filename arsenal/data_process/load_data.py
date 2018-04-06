@@ -4,7 +4,7 @@ import numpy as np
 class DataLoader(object):
     def __init__(self):
         pass
-    def load(self, data_path, delimiter = ','):
+    def load(self, data_path, delimiter=','):
         
         data_type = data_path.split(".")[-1];
     

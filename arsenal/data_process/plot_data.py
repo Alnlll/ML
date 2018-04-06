@@ -7,11 +7,23 @@ class Ploter(object):
     def plot(self, *args, **kwargs):
         plt.plot(*args, **kwargs)
 
-    def axis_label(self, axis=0, label=''):
+    def label(self, axis=0, label=''):
         if 0 == axis:
             plt.xlabel(label)
         if 1 == axis:
             plt.ylabel(label)
+
+    def lim(self, min, max, axis=0):
+        if 0 == axis:
+            plt.xlim(min, max)
+        else:
+            plt.ylim(min, max)
+
+    def legend(self, *args, **kwargs):
+        plt.legend(*args, **kwargs)
+
+    def title(self, *args, **kwargs):
+        plt.title(*args, **kwargs)
 
     def draw_line(self, dot1, dot2, set_str = 'k-'):
         plt.figure()

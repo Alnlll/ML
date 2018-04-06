@@ -1,5 +1,5 @@
 import numpy as np
-from arsenal.common.basic_func import Sigmoid
+from arsenal.common.basic_func import Sigmoid, dSigmoid
 
 class LogisticRegression(object):
 
