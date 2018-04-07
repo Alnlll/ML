@@ -85,8 +85,6 @@ class NueralNetwork(object):
 
     def predict(self, X, threshold=0.5):
 
-        m = X.shape[1]
-
         p = self.forward_propagation(X)
 
         p[p >= threshold] = 1
