@@ -23,6 +23,19 @@ def dRelu(x):
 
     return dR
 
+def Softmax(x):
+    return np.exp(x) / np.sum(np.exp(x))
+
+def dSoftmax(x):
+    dS = np.zeros((x.shape[0], x.shape[0]))
+    S = Softmax(x)
+
+    for i in range(dS.shape[1]):
+        dS[:, i] = -S*S[i]
+        dS[i, i] = S[i]*(1-S[i])
+
+    return dS
+
 def basic_func(name, x):
     dealer = {
         "sigmoid": Sigmoid,
@@ -31,6 +44,8 @@ def basic_func(name, x):
         "dtanh": dTanh,
         "relu": Relu,
         "drelu": dRelu,
+        "softmax": Softmax,
+        "dsoftmax": dSoftmax,
     }
 
     assert (name in dealer.keys())

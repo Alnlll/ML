@@ -50,7 +50,8 @@ class NueralNetwork(object):
 
         return aL
 
-    def backward_propagation(self, daL, end = 1):
+    # The regularization is just L2 
+    def backward_propagation(self, daL, end = 1, reg_flag=False, lambd=0.1):
         assert(1 <= end <= self.L)
 
         for l in range(self.L, end-1, -1):
@@ -70,18 +71,24 @@ class NueralNetwork(object):
             # Get dW, db
             a_prev = self.map['L'+str(l-1)]['a']
             dz_w = a_prev.T
-            params['dW'] = np.dot(dz, dz_w)
-            params['db'] = np.sum(dz, axis=1, keepdims=True)
 
-    def update_params(self, rate=0.1, flag_reg=False):
+            # Calculate regularization item
+            if reg_flag:
+                regu_item_W = lambd * params['dW'];
+                regu_item_b = lambd * params['db'];
+            if not reg_flag:
+                regu_item_W = 0;
+                regu_item_b = 0;
+
+            params['dW'] = np.dot(dz, dz_w) + regu_item_W
+            params['db'] = np.sum(dz, axis=1, keepdims=True) + regu_item_b
+
+    def update_params(self, rate=0.1):
         for l in range(1, self.L+1):
             params = self.map['L'+str(l)]
 
-            if flag_reg:
-                pass
-            else:
-                params['W'] = self.optimizer.descent(params['dW'], params['W'], rate=rate)
-                params['b'] = self.optimizer.descent(params['db'], params['b'], rate=rate)
+            params['W'] = self.optimizer.descent(params['dW'], params['W'], rate=rate)
+            params['b'] = self.optimizer.descent(params['db'], params['b'], rate=rate)
 
     def predict(self, X, threshold=0.5):
 
@@ -91,4 +98,3 @@ class NueralNetwork(object):
         p[p < threshold] = 0
 
         return p
-
