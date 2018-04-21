@@ -30,6 +30,9 @@ class Ploter(object):
         plt.plot(np.array(([dot1(1),dot2(1)])), np.array(([dot1(2),dot2(2)])), set_str)
         plt.show()
 
+    def show_image(self, *args, **kwargs):
+        return plt.imshow(*args, **kwargs)
+
     def show(self):
         plt.show()
 
