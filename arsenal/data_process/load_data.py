@@ -2,7 +2,7 @@ import h5py
 import scipy.io as sio
 import numpy as np
 
-class DataLoader(object):
+class DataHandler(object):
     def __init__(self):
         pass
     def load(self, data_path, delimiter=','):
@@ -19,4 +19,7 @@ class DataLoader(object):
             f = h5py.File(data_path)
             keys = [key for key in f.keys()]
             return f,keys
+
+    def convert_to_one_hot(self, X, C):
+        return np.eye(C)[X.reshape(-1)].T
             
